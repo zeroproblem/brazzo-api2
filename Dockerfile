@@ -5,14 +5,15 @@ FROM node:18-alpine
 WORKDIR /opt/app
 
 # --- START: FIX ---
-# Install build tools for native node_modules (like sharp)
-# Then remove them after installation to keep the image small
-RUN apk add --no-cache --virtual .gyp \
+# 1. Update the package repository index
+# 2. Install build tools for native node_modules (like sharp)
+# 3. Install libc6-compat for compatibility
+RUN apk update && \
+    apk add --no-cache --virtual .build-deps \
         python3 \
         make \
         g++ \
-    && apk add --no-cache libc6-compat \
-    && npm install -g npm@latest
+    && apk add --no-cache libc6-compat
 # --- END: FIX ---
 
 # Copy package.json and package-lock.json
@@ -22,8 +23,8 @@ COPY package*.json ./
 RUN npm ci --only=production && npm cache clean --force
 
 # --- START: FIX ---
-# Remove the build tools
-RUN apk del .gyp
+# Remove the build tools to keep the final image small
+RUN apk del .build-deps
 # --- END: FIX ---
 
 # Copy the rest of the application code
