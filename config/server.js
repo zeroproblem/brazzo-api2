@@ -1,6 +1,6 @@
 module.exports = ({ env }) => ({
-  //host: env('HOST', '0.0.0.0'),
-  host: env('HOST', 'https://apibrazzo.zeroproblem.com.br'),
+  host: env('HOST', '0.0.0.0'),
+  //host: env('HOST', 'https://apibrazzo.zeroproblem.com.br'),
   port: env.int('PORT', 1337),
   app: {
     keys: env.array('APP_KEYS'),
