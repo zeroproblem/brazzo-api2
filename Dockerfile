@@ -26,7 +26,9 @@ RUN npm run build
 EXPOSE 3000
 
 # Set the environment to production
-ENV NODE_ENV=production
+#ENV NODE_ENV=production
+ENV NODE_ENV=development
 
 # The command to run the application
 CMD ["npm", "run", "start"]
+
