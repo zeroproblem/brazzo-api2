@@ -4,6 +4,9 @@ const { mergeConfig } = require('vite');
 const env = process.env.NODE_ENV || 'development';
 const hostname = process.env.HOST || '0.0.0.0';
 
+const extraHosts = (process.env.ALLOWED_HOSTS || '').split(',').filter(Boolean);
+const allowedHosts = ['localhost', '127.0.0.1', ...extraHosts];
+
 // Core allowlist (always permitted)
 const baseAllowedHosts = ['localhost', '127.0.0.1'];
 
