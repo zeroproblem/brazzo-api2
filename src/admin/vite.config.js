@@ -1,25 +1,36 @@
+const { mergeConfig } = require('vite');
 
-export default defineConfig({
-  plugins: [react()],
-  server: {
+module.exports = (config) => {
+  // Important: always return the modified config
+  return mergeConfig(config, {
+    resolve: {
+      alias: {
+        '@': '/src',
+      },
+
+
+server: {
     host: '0.0.0.0',
     allowedHosts: [
       'localhost',
       '127.0.0.1',
       'apibrazzo.zeroproblem.com.br',   // production
-      'staging.zeroproblem.com.br',     // optional staging
-      'dev.zeroproblem.com.br',         // optional dev
+      'brazzodev.zeroproblem.com.br',     // optional staging
     ],
     // optional: customize dev port if needed
     port: 1337,
   },
-  preview: {
+
+preview: {
     allowedHosts: [
       'localhost',
       '127.0.0.1',
       'apibrazzo.zeroproblem.com.br',
-      'staging.zeroproblem.com.br',
-      'dev.zeroproblem.com.br',
+      'brazzodev.zeroproblem.com.br',
     ],
   },
-});
+
+      
+    },
+  });
+};
