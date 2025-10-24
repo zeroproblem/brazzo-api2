@@ -11,8 +11,8 @@ const baseAllowedHosts = ['localhost', '127.0.0.1'];
 if (env === 'production' || env === 'development') {
   baseAllowedHosts.push(
     'apibrazzo.zeroproblem.com.br',  // production domain
-    'staging.zeroproblem.com.br',    // optional staging
-    'dev.zeroproblem.com.br'         // optional dev domain
+    'brazzodev.zeroproblem.com.br',    // optional staging
+    //'dev.zeroproblem.com.br'         // optional dev domain
   );
 }
 
