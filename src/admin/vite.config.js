@@ -1,33 +1,25 @@
-// vite.config.js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-
-// Detect environment
-const env = process.env.NODE_ENV || 'development';
-const hostname = process.env.HOST || '0.0.0.0';
-
-const extraHosts = (process.env.ALLOWED_HOSTS || '').split(',').filter(Boolean);
-const allowedHosts = ['localhost', '127.0.0.1', ...extraHosts];
-
-// Core allowlist (always permitted)
-const baseAllowedHosts = ['localhost', '127.0.0.1'];
-
-// Extend allowlist dynamically for deployed environments
-if (env === 'production' || env === 'development') {
-  baseAllowedHosts.push(
-    'apibrazzo.zeroproblem.com.br',  // production domain
-    'brazzodev.zeroproblem.com.br',    // optional staging
-  );
-}
 
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: hostname,
+    host: '0.0.0.0',
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      'apibrazzo.zeroproblem.com.br',   // production
+      'staging.zeroproblem.com.br',     // optional staging
+      'dev.zeroproblem.com.br',         // optional dev
+    ],
+    // optional: customize dev port if needed
     port: 1337,
-    allowedHosts: baseAllowedHosts,
   },
   preview: {
-    allowedHosts: baseAllowedHosts,
+    allowedHosts: [
+      'localhost',
+      '127.0.0.1',
+      'apibrazzo.zeroproblem.com.br',
+      'staging.zeroproblem.com.br',
+      'dev.zeroproblem.com.br',
+    ],
   },
 });
