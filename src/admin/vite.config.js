@@ -12,7 +12,7 @@ module.exports = (config) => {
     'localhost',
     '127.0.0.1',
     'brazzodev.zeroproblem.com.br',   // dev
-    'apibrazzo.zeroproblem.com.br',   // prod
+    //'apibrazzo.zeroproblem.com.br',   // prod
     ...envHosts,
   ];
 
