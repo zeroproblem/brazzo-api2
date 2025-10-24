@@ -14,8 +14,8 @@ RUN apt-get update && \
 COPY package*.json ./
 
 # Install dependencies
-#RUN npm ci --only=production && npm cache clean --force
-RUN npm ci --only=development && npm cache clean --force
+RUN npm ci --only=production && npm cache clean --force
+#RUN npm ci --only=development && npm cache clean --force
 # Copy the rest of the application code
 COPY . .
 
@@ -32,4 +32,5 @@ ENV NODE_ENV=development
 # The command to run the application
 #CMD ["npm", "run", "start"]
 CMD ["npm", "run", "develop"]
+
 
