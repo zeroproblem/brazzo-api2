@@ -1,22 +1,20 @@
-// vite.config.js
-//import { defineConfig } from 'vite';
-//import react from '@vitejs/plugin-react';
-
-// Strapi Admin dev config
-//export default defineConfig({
- //plugins: [react()],
-  //server: {
-   //host: '0.0.0.0',
-   // allowedHosts: [
-     // 'localhost',
-     // '127.0.0.1',
-    //  'apibrazzo.zeroproblem.com.br'  // 👈 add your domain here
-   // ],
-   // port: 1337, // optional, only if you run the admin separately
- // },
-//});
-
 const { mergeConfig } = require('vite');
+
+// Detect environment
+const env = process.env.NODE_ENV || 'development';
+const hostname = process.env.HOST || '0.0.0.0';
+
+// Core allowlist (always permitted)
+const baseAllowedHosts = ['localhost', '127.0.0.1'];
+
+// Extend allowlist dynamically for deployed environments
+if (env === 'production' || env === 'development') {
+  baseAllowedHosts.push(
+    'apibrazzo.zeroproblem.com.br',  // production domain
+    'staging.zeroproblem.com.br',    // optional staging
+    'dev.zeroproblem.com.br'         // optional dev domain
+  );
+}
 
 module.exports = (config) => {
   // Important: always return the modified config
@@ -25,15 +23,17 @@ module.exports = (config) => {
       alias: {
         '@': '/src',
       },
-      server: {
-        host: '0.0.0.0',
-          allowedHosts: [
-           'localhost',
-           '127.0.0.1',
-           'apibrazzo.zeroproblem.com.br'  // 👈 add your domain here
-          ],
-    port: 1337, // optional, only if you run the admin separately
+     
+server: {
+    host: hostname,
+    port: 1337,
+    allowedHosts: baseAllowedHosts,
   },
+  preview: {
+    allowedHosts: baseAllowedHosts,
+  },
+
+     
     },
   });
 };
