@@ -1,4 +1,6 @@
-const { mergeConfig } = require('vite');
+// vite.config.js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 // Detect environment
 const env = process.env.NODE_ENV || 'development';
@@ -15,19 +17,12 @@ if (env === 'production' || env === 'development') {
   baseAllowedHosts.push(
     'apibrazzo.zeroproblem.com.br',  // production domain
     'brazzodev.zeroproblem.com.br',    // optional staging
-    //'dev.zeroproblem.com.br'         // optional dev domain
   );
 }
 
-module.exports = (config) => {
-  // Important: always return the modified config
-  return mergeConfig(config, {
-    resolve: {
-      alias: {
-        '@': '/src',
-      },
-     
-server: {
+export default defineConfig({
+  plugins: [react()],
+  server: {
     host: hostname,
     port: 1337,
     allowedHosts: baseAllowedHosts,
@@ -35,8 +30,4 @@ server: {
   preview: {
     allowedHosts: baseAllowedHosts,
   },
-
-     
-    },
-  });
-};
+});
