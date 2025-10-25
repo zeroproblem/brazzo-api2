@@ -31,8 +31,9 @@ EXPOSE 1337
 ENV NODE_ENV=development
 
 # The command to run the application
-#CMD ["npm", "run", "start"]
-CMD ["npm", "run", "develop"]
+CMD ["npm", "run", "start"]
+#CMD ["npm", "run", "develop"]
+
 
 
 
