@@ -27,12 +27,13 @@ RUN npm run build
 EXPOSE 1337
 
 # Set the environment to production
-#ENV NODE_ENV=production
-ENV NODE_ENV=development
+ENV NODE_ENV=production
+#ENV NODE_ENV=development
 
 # The command to run the application
 #CMD ["npm", "run", "start"]
 CMD ["npm", "run", "develop"]
+
 
 
 
