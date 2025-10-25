@@ -23,7 +23,8 @@ COPY . .
 RUN npm run build
 
 # Expose the port Strapi runs on
-EXPOSE 3000
+#EXPOSE 3000
+EXPOSE 1337
 
 # Set the environment to production
 #ENV NODE_ENV=production
@@ -32,5 +33,6 @@ ENV NODE_ENV=development
 # The command to run the application
 #CMD ["npm", "run", "start"]
 CMD ["npm", "run", "develop"]
+
 
 
